@@ -48,7 +48,26 @@ const resolvers = {
     
           return { token, user };
         },
-     
+
+    addBook: async(parent, { bookId } ) => {
+        if (User) {
+
+            const book = await bookSchema.findOne({bookId})
+
+            await User.findOneAndUpdate(
+                { username: bookId },
+                { $addToSet: { books: book._id }}
+                );
+                return book;
+        }
+    },
+
+    removeBook: async (parent, { bookId }) => {
+        return Book.findOneAndDelete({ _id: bookId})
     }
 
     }
+
+    }
+
+    module.exports = resolvers;
