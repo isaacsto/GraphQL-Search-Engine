@@ -48,7 +48,7 @@ export const GET_BOOK_BY_ID = gql`
       bookId 
       image 
       link 
-      ttitle
+      title
     }
   }
 `;
