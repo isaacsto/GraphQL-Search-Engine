@@ -20,7 +20,7 @@ module.exports = {
 
 
     if (!token) {
-      return req;
+      return res.status(401).json({message: "Auth required"});
     }
 
     // verify token and get user data out of it
@@ -28,7 +28,7 @@ module.exports = {
       const { data } = jwt.verify(token, secret, { maxAge: expiration });
       req.user = data;
     } catch {
-      console.log("Invalid token");
+      console.log("Invalid token", error);
       return res.status(400).json({ message: "invalid token!" });
     }
 
